@@ -138,6 +138,9 @@ func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 //20.
 func isValid(s string) bool {
 	str1 := ""
+	if s == ""{
+		return true
+	}
 	if len(s) < 2 || s[:1] == "}" || s[:1] == ")" || s[:1] == "]" {
 		return false
 	}
