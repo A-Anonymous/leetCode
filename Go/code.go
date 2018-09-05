@@ -62,9 +62,9 @@ func main (){
 	//示例 5:
 	//输入: "{[]}"
 	//输出: true 
-	s := "{[]}"
+	s := ""
 	fmt.Println(isValid(s))
-	
+	fmt.Println(isValidOther(s))
 	
 	//21. 合同两个有序链表 mergeTwoLists
 	//将两个有序链表合并为一个新的有序链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。
@@ -137,60 +137,71 @@ func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 
 //20.
 func isValid(s string) bool {
-	//str := s[1:]
-	//str2 := s[len(s)-1:]
-	//str3 := s[:1]
-	//fmt.Println(str)
-	//fmt.Println(str2)
-	//fmt.Println(str3)
 	str1 := ""
-	if s[:1] =="}" || s[:1] ==")" || s[:1] =="]"{
-		return true
+	if len(s) < 2 || s[:1] == "}" || s[:1] == ")" || s[:1] == "]" {
+		return false
 	}
-	for{
-		str1 += s[:1]
-		s = s[1:]
-		//if s[1:] == "}" || s[1:] == ")" || s[1:] == "]"{
-		//	
-		//}
-		fmt.Println("str1: ", str1)
-		fmt.Println("s: ", s)
-		fmt.Println("str1[len(str1)-1:]: ", str1[len(str1)-1:])
-		switch s[:1] {
-		case "}":
-			if str1[len(str1)-1:] == "{"{
-				str1 = str1[:len(str1)-1]
-				s = s[1:]
-			}else {
-				return false
-			}
-		
-		case ")":
-			if str1[len(str1)-1:] == "}"{
-				str1 = str1[:len(str1)-1]
-				s = s[1:]
-			}else {
-				return false
-			}
-		case "]":
-			if str1[len(str1)-1:] == "["{
-				str1 = str1[:len(str1)-1]
-				s = s[1:]
-			}else {
-				return false
+	for s !=""{
+		if s[:1] == "{" || s[:1] == "(" || s[:1] == "["{
+			str1 += s[:1]
+		}else{
+			switch s[:1] {
+			case "}":
+				if str1 != "" && str1[len(str1)-1:] == "{" {
+					str1 = str1[:len(str1)-1]
+				}else {
+					return false
+				}
+
+			case ")":
+				if str1 != "" && str1[len(str1)-1:] == "("{
+					str1 = str1[:len(str1)-1]
+				}else {
+					return false
+				}
+			case "]":
+				if str1 != "" && str1[len(str1)-1:] == "["{
+					str1 = str1[:len(str1)-1]
+				}else {
+					return false
+				}
 			}
 		}
-		
-		if s ==""{
+		s = s[1:]
+		if s =="" && str1 == ""{
 			return true
 		}
-		
+		if s =="" && str1 != ""{
+			break
+		}
 	}
-	if str1 ==""{
-		return true
-	}
-	
 	return false 
+}
+func isValidOther(s string) bool{
+	brackets := map[byte]byte{'(':')','[':']','{':'}'}
+
+	stack := []byte{}
+
+	for i := 0; i < len(s); i++ {
+		if _, ok := brackets[s[i]]; ok {
+			stack = append(stack, s[i])
+		} else {
+			if 0 == len(stack) {
+				return false
+			}
+			ch := stack[len(stack) - 1]
+			if s[i] == brackets[ch] {
+				stack = stack[:len(stack) - 1]
+			} else {
+				return false
+			}
+		}
+	}
+
+	if 0 < len(stack) {
+		return false
+	}
+	return true
 }
 
 //21.
