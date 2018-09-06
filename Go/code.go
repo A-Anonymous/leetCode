@@ -1,7 +1,10 @@
  
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"strconv"
+)
 
 //公用:2. 21.
 type ListNode struct {
@@ -62,9 +65,29 @@ func main (){
 	//示例 5:
 	//输入: "{[]}"
 	//输出: true 
-	s := ""
-	fmt.Println(isValid(s))
-	fmt.Println(isValidOther(s))
+	//s := ""
+	//fmt.Println(isValid(s))
+	//fmt.Println(isValidOther(s))
+
+
+	//9.回文数 isPalindrome
+	//判断一个整数是否是回文数。回文数是指正序（从左向右）和倒序（从右向左）读都是一样的整数。
+	//示例 1:
+	//输入: 121
+	//输出: true
+	//示例 2:
+	//输入: -121
+	//输出: false
+	//解释: 从左向右读, 为 -121 。 从右向左读, 为 121- 。因此它不是一个回文数。
+	//示例 3:
+	//输入: 10
+	//输出: false
+	//解释: 从右向左读, 为 01 。因此它不是一个回文数。
+	//进阶:
+	//你能不将整数转为字符串来解决这个问题吗？
+	var c int
+	fmt.Println(isPalindrome(c))
+	
 	
 	//21. 合同两个有序链表 mergeTwoLists
 	//将两个有序链表合并为一个新的有序链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。
@@ -101,6 +124,7 @@ func twoSum(nums []int, target int) []int {
 	
 }
 
+
 //2.
 /**
 * Definition for singly-linked list.
@@ -134,6 +158,22 @@ func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 	}
 	return l3
 }
+
+
+//9.
+func isPalindrome(x int) bool {
+	s := strconv.Itoa(x)
+	for len(s) > 1{
+		if s[:1] == s[len(s)-1:]{
+			s = s[1:]
+			s = s[:len(s)-1]
+		}else{
+			return false
+		}
+	}
+	return true
+}
+
 
 //20.
 func isValid(s string) bool {
