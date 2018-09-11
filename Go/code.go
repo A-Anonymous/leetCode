@@ -85,8 +85,8 @@ func main (){
 	//解释: 从右向左读, 为 01 。因此它不是一个回文数。
 	//进阶:
 	//你能不将整数转为字符串来解决这个问题吗？
-	var c int
-	fmt.Println(isPalindrome(c))
+	//var c int
+	//fmt.Println(isPalindrome(c))
 	
 	
 	//21. 合同两个有序链表 mergeTwoLists
@@ -104,7 +104,24 @@ func main (){
 	//	fmt.Print(l3.Val)
 	//	l3 = l3.Next
 	//}
-
+	
+	//88.合并两个有序数组 Merge Sorted Array
+	//给定两个有序整数数组 nums1 和 nums2，将 nums2 合并到 nums1 中，使得 num1 成为一个有序数组。
+	//说明:
+	//初始化 nums1 和 nums2 的元素数量分别为 m 和 n。
+	//你可以假设 nums1 有足够的空间（空间大小大于或等于 m + n）来保存 nums2 中的元素。
+	//示例:
+	//输入:
+	//nums1 = [1,2,3,0,0,0], m = 3
+	//nums2 = [2,5,6],       n = 3
+	//输出: [1,2,2,3,5,6]
+	nums1 := []int{1,2,3,0,0,0}
+	m := 3
+	nums2 := []int{2,5,6}
+	n := 3
+	merge(nums1, m, nums2, n)
+	fmt.Println(nums1)
+	
 }
 
 //1.
@@ -285,3 +302,55 @@ func mergeTwoLists(l1 *ListNode, l2 *ListNode) *ListNode {
 }
 
 
+//88.
+func merge(nums1 []int, m int, nums2 []int, n int)  {
+	var nums3 []int
+	i := 0
+	j := 0
+	k := 0
+	if len(nums2) < 1 {
+		return 
+	}
+	for m > -0 || n > 0 {
+		if m > -0 && n > 0{
+			if nums1[j] > nums2[k]{
+				nums3 = append(nums3, nums2[k])
+				k++
+				n--
+			}else{
+				nums3 = append(nums3, nums1[j])
+				j++
+				m--
+			}
+		}else{
+			if m > 0{
+				nums3 = append(nums3, nums1[j])
+				j++
+				m--
+			}else{
+				nums3 = append(nums3, nums2[k])
+				k++
+				n--
+			}
+		}
+		i++
+	} 
+	for k, v := range nums3{
+		nums1[k] = v
+	}
+}
+func mergeOther(nums1 []int, m int, nums2 []int, n int)  {
+	for m > 0 && n > 0 {
+		a, b := nums1[m-1], nums2[n-1]
+		if a > b {
+			nums1[m+n-1] = a
+			m--
+		} else {
+			nums1[m+n-1] = b
+			n--
+		}
+	}
+	if n > 0 {
+		copy(nums1[:n], nums2[:n])
+	}
+}
