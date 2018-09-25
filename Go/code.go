@@ -143,9 +143,9 @@ func main (){
 	//所有输入只包含小写字母 a-z 。 
 	//fmt.Println(longestCommonPrefix([]string{"flower","flow","flight"}))
 	//fmt.Println(longestCommonPrefix([]string{"dog","racecar","car"}))
-	fmt.Println(longestCommonPrefix([]string{"dog"}))
-	fmt.Println(longestCommonPrefix([]string{}))
-	fmt.Println("end")
+	//fmt.Println(longestCommonPrefix([]string{"dog"}))
+	//fmt.Println(longestCommonPrefix([]string{}))
+	//fmt.Println("end")
 
 
 
@@ -191,6 +191,12 @@ func main (){
 	//	fmt.Print(l3.Val)
 	//	l3 = l3.Next
 	//}
+
+	
+	//26. 删除排序数组中的重复项
+	nums := []int{0, 0, 1, 1, 1, 2, 2, 3, 3, 4}
+	fmt.Println(removeDuplicates(nums))
+	fmt.Println(nums)
 	
 	
 	//88.合并两个有序数组 Merge Sorted Array
@@ -439,6 +445,7 @@ func isValidOther(s string) bool{
 	return true
 }
 
+
 //21.
 /**
  * Definition for singly-linked list.
@@ -476,6 +483,20 @@ func mergeTwoLists(l1 *ListNode, l2 *ListNode) *ListNode {
 	return l3.Next
 }
 
+
+//26
+func removeDuplicates(nums []int) int {
+	index := len(nums)
+	for i:=1; i<index; i++ {
+		if nums[i-1] == nums[i] {
+			index --
+			for j := i; j < len(nums); j++ {
+				nums[j-1] = nums[j]
+			}
+		}
+	}
+	return index
+}
 
 //88.
 func merge(nums1 []int, m int, nums2 []int, n int)  {
